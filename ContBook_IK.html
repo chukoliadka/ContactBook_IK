@@ -1,181 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact book</title>
+    <title>Contacts</title>
+    <link rel="stylesheet" href="ContactBook_IK.css">
 </head>
+
 <body>
-    <main>
-        <header>
-            <h1>Contact book</h1>
-            <p>3 saved</p>
-            <button>+ Add contact</button>
-        </header>
+    <div class="container">
+        <!-- Ліва панель: Список контактів -->
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <div class="title-group">
+                    <h1>Contacts</h1>
+                    <span class="count">12 saved</span>
+                </div>
 
-        <form>
-            <p>
-                <label for="family-name">First name:</label>
-                <input 
-                    type="text"
-                    id="family-name"
-                    name="family-name"
-                    placeholder="Enter your first name"
-                    autocomplete="family-name"
-                    required
-                >
-            </p>
+                <button type="button" class="btn-add" aria-label="Додати новий контакт">
+                    + Add contact
+                </button>
+            </header>
 
-            <p>
-                <label for="nickname">Last name:</label>
-                <input 
-                    type="text"
-                    id="nickname"
-                    name="nickname"
-                    placeholder="Enter your last name"
-                    autocomplete="nickname"
-                    required
-                >
-            </p>
+            <!-- Пошук -->
+            <search class="search-box">
+                <form onsubmit="return false;">
+                    <!-- Об'єднує іконку та поле введення в єдину форму. 
+                     Це стандарт хорошого тону, щоб кнопка "Go/Search" на екранній клавіатурі смартфонів працювала коректно
+                     Оскільки це веб-додаток (і пошук, скоріш за все, буде відбуватися "на льоту" за допомогою JavaScript), 
+                     атрибут блокує перезавантаження сторінки при натисканні клавіші Enter -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide-search">
+                        <path d="m21 21-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                    </svg>
 
-            <p>
-                <label for="phonenumber">Phone:</label>
-                <input
-                    type="tel"
-                    id="phonenumber"
-                    name="phonenumber"
-                    placeholder="+380961234567"
-                    autocomplete="tel"
-                    required
-                >
-            </p>
-            
-            <p>
-                <label for="useremail">Email:</label>
-                <input
-                    type="email"
-                    id="useremail"
-                    name="useremail"
-                    placeholder="example@email.com"
-                    autocomplete="email"
-                    required
-                >
-            </p>
+                    <input type="search" placeholder="Search name, phone, or email" aria-label="Пошук контактів">
+                </form>
+            </search>
 
-            <p>
-                <label for="usernote">Note:</label>
-                <input
-                    type="text"
-                    id="usernote"
-                    name="usernote"
-                    placeholder="Add a shirt description"
-                    autocomplete="off"
-                >
-            </p>
+            <!-- Навігація по контактах -->
+            <nav class="contacts-nav" aria-label="Список контактів">
+                <section class="group-section">
+                    <h2 class="group-letter">A</h2>
 
-            <button type="submit">Save Contact</button>
-        </form>
-        
-        <form>
-            <label for="search-input"></label>
-            <input
-                type="search" 
-                id="search-input"
-                name="search-input"
-                autocomplete="Search contacts"
-                placeholder="Search name phone or email"
-            >
-        </form>
+                    <ul class="contacts-list">
+                        <li>
+                            <button type="button" class="contact-item">
+                                <span class="avatar av-ab">AB</span>
 
-        <h2>A</h2>
-        <ul>
-            <li>
-                <strong>Amelia Benko</strong>
-                <p>+380 (63) 555 01 82</p>
-                <p>am.benko@fieldnode.com</p>
-            </li>
+                                <span class="contact-info">
+                                    <span class="name">Amara Bello</span>
+                                    <span class="detail">+1 (415) 555-0182</span>
+                                </span>
+                            </button>
+                        </li>
 
-            <li>
-                <strong>Anastasia Hlushko</strong>
-                <p>+380 (68) 595 01 99</p>
-                <p>an.hlushko@fieldnode.com</p>
-            </li>
-        </ul>
-        
-        <h2>B</h2>     
-        <ul>
-            <li>
-                <strong>Bogdan Hlushko</strong>
-                <p>+380 (93) 515 05 82</p>
-                <p>bo.hlushko@fieldnode.com</p>
-            </li>
-        </ul>
-        
-        <header>
-            <h1>Amelia Benko</h1>
-            <p>нотатка</p>
-            <button>Edit</button>
-            <button>Delete</button>
-        </header>
+                        <li>
+                            <button type="button" class="contact-item">
+                                <span class="avatar av-ar">AR</span>
 
-        <p>
-            <strong>PHONE:</strong>
-            +380 (63) 555 01 82
-        </p>
+                                <span class="contact-info">
+                                    <span class="name">Anton Reyes</span>
+                                    <span class="detail">anton.reyes@mail.com</span>
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </section>
 
-        <p>
-            <strong>EMAIL:</strong>
-            am.benko@fieldnode.com
-        </p>
+                <section class="group-section">
+                    <h2 class="group-letter">D</h2>
 
-        <p>
-            <strong>NOTE:</strong>
-            short description
-        </p>
+                    <ul class="contacts-list">
+                        <li>
+                            <button type="button" class="contact-item">
+                                <span class="avatar av-dk">DK</span>
 
-        <header>
-            <h1>Anastasia Hlushko</h1>
-            <p>нотатка</p>
-            <button>Edit</button>
-            <button>Delete</button>
-        </header>
+                                <span class="contact-info">
+                                    <span class="name">Dana Kimura</span>
+                                    <span class="detail">+1 (206) 555-0117</span>
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </section>
 
-        <p>
-            <strong>PHONE:</strong>
-            +380 (68) 595 01 99
-        </p>
+                <section class="group-section">
+                    <h2 class="group-letter">M</h2>
 
-        <p>
-            <strong>EMAIL:</strong>
-            an.hlushko@fieldnode.com
-        </p>
+                    <ul class="contacts-list">
+                        <li>
+                            <!-- Активний елемент -->
+                            <button type="button" class="contact-item active" aria-current="true">
+                                <span class="avatar av-mn">MN</span>
 
-        <p>
-            <strong>NOTE:</strong>
-            short description
-        </p>
+                                <span class="contact-info">
+                                    <span class="name">Maria Novak</span>
+                                    <span class="detail">+1 (312) 555-0146</span>
+                                </span>
+                            </button>
+                        </li>
 
-        <header>
-            <h1>Bogdan Hlushko</h1>
-            <p>нотатка</p>
-            <button>Edit</button>
-            <button>Delete</button>
-        </header>
+                        <li>
+                            <button type="button" class="contact-item">
+                                <span class="avatar av-mo">MO</span>
 
-        <p>
-            <strong>PHONE:</strong>
-            +380 (93) 515 05 82
-        </p>
+                                <span class="contact-info">
+                                    <span class="name">Miles Okafor</span>
+                                    <span class="detail">miles.o@studio.dev</span>
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </section>
 
-        <p>
-            <strong>EMAIL:</strong>
-            bo.hlushko@fieldnode.com
-        </p>
+                <section class="group-section">
+                    <h2 class="group-letter">S</h2>
 
-        <p>
-            <strong>NOTE:</strong>
-            short description
-        </p>
-    </main>
+                    <ul class="contacts-list">
+                        <li>
+                            <button type="button" class="contact-item">
+                                <span class="avatar av-sl">SL</span>
+
+                                <span class="contact-info">
+                                    <span class="name">Sana Lindqvist</span>
+                                    <span class="detail">+46 70 555 01 99</span>
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </section>
+            </nav>
+        </aside>
+
+        <!-- Права панель: Деталі контакту -->
+        <main class="main-content">
+            <header class="profile-header">
+                <div class="profile-summary">
+                    <div class="avatar-large" aria-hidden="true">MN</div>
+
+                    <div class="profile-title">
+                        <h2>Maria Novak</h2>
+
+                        <p class="timestamp">
+                            Added Mar 14 ·
+                            <span class="fallback-text">avatar: initials fallback</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" class="btn-edit">Edit</button>
+                    <button type="button" class="btn-delete">Delete</button>
+                </div>
+            </header>
+
+            <!-- Таблиця опису -->
+            <dl class="details-grid">
+                <div class="table-row">
+                    <dt class="label">PHONE</dt>
+                    <dd class="value">+1 (312) 555-0146</dd>
+                </div>
+
+                <div class="table-row">
+                    <dt class="label">EMAIL</dt>
+                    <dd class="value">maria.novak@fastmail.com</dd>
+                </div>
+
+                <div class="table-row">
+                    <dt class="label">NOTE</dt>
+                    <dd class="value value-note">Study group partner — prefers texts over calls. Met at the Week 3
+                        workshop.</dd>
+                </div>
+            </dl>
+
+            <!-- Нижня технічна ремарка -->
+            <footer class="tech-note">
+                <p>Async touchpoint: avatar image is fetched from a placeholder-avatar API. While loading — and on any
+                    fetch failure — the initials circle renders instead. The app never blocks on this request.</p>
+            </footer>
+        </main>
+    </div>
 </body>
+
 </html>
