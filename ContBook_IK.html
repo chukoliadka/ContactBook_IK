@@ -15,171 +15,97 @@
             <header class="sidebar-header">
                 <div class="title-group">
                     <h1>Contacts</h1>
-                    <span class="count">12 saved</span>
+                    <span class="count" id="contacts-counter">0 saved</span>
                 </div>
 
-                <button type="button" class="btn-add" aria-label="Додати новий контакт">
+                <button type="button" class="btn-add" id="add-contact-btn" aria-label="Додати новий контакт">
                     + Add contact
                 </button>
             </header>
 
-            <!-- Пошук -->
             <search class="search-box">
                 <form onsubmit="return false;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide-search">
                         <path d="m21 21-4.34-4.34" />
                         <circle cx="11" cy="11" r="8" />
                     </svg>
 
-                    <input type="search" placeholder="Search name, phone, or email" aria-label="Пошук контактів">
+                    <input type="search" id="search-input" placeholder="Search name, phone, or email"
+                        aria-label="Пошук контактів">
                 </form>
             </search>
 
             <!-- Навігація по контактах -->
-            <nav class="contacts-nav" aria-label="Список контактів">
-                <section class="group-section">
-                    <h2 class="group-letter">A</h2>
-
-                    <ul class="contacts-list">
-                        <li>
-                            <button type="button" class="contact-item">
-                                <span class="avatar av-ab">AB</span>
-
-                                <span class="contact-info">
-                                    <span class="name">Amara Bello</span>
-                                    <span class="detail">+1 (415) 555-0182</span>
-                                </span>
-                            </button>
-                        </li>
-
-                        <li>
-                            <button type="button" class="contact-item">
-                                <span class="avatar av-ar">AR</span>
-
-                                <span class="contact-info">
-                                    <span class="name">Anton Reyes</span>
-                                    <span class="detail">anton.reyes@mail.com</span>
-                                </span>
-                            </button>
-                        </li>
-                    </ul>
-                </section>
-
-                <section class="group-section">
-                    <h2 class="group-letter">D</h2>
-
-                    <ul class="contacts-list">
-                        <li>
-                            <button type="button" class="contact-item">
-                                <span class="avatar av-dk">DK</span>
-
-                                <span class="contact-info">
-                                    <span class="name">Dana Kimura</span>
-                                    <span class="detail">+1 (206) 555-0117</span>
-                                </span>
-                            </button>
-                        </li>
-                    </ul>
-                </section>
-
-                <section class="group-section">
-                    <h2 class="group-letter">M</h2>
-
-                    <ul class="contacts-list">
-                        <li>
-                            <!-- Активний елемент -->
-                            <button type="button" class="contact-item active" aria-current="true">
-                                <span class="avatar av-mn">MN</span>
-
-                                <span class="contact-info">
-                                    <span class="name">Maria Novak</span>
-                                    <span class="detail">+1 (312) 555-0146</span>
-                                </span>
-                            </button>
-                        </li>
-
-                        <li>
-                            <button type="button" class="contact-item">
-                                <span class="avatar av-mo">MO</span>
-
-                                <span class="contact-info">
-                                    <span class="name">Miles Okafor</span>
-                                    <span class="detail">miles.o@studio.dev</span>
-                                </span>
-                            </button>
-                        </li>
-                    </ul>
-                </section>
-
-                <section class="group-section">
-                    <h2 class="group-letter">S</h2>
-
-                    <ul class="contacts-list">
-                        <li>
-                            <button type="button" class="contact-item">
-                                <span class="avatar av-sl">SL</span>
-
-                                <span class="contact-info">
-                                    <span class="name">Sana Lindqvist</span>
-                                    <span class="detail">+46 70 555 01 99</span>
-                                </span>
-                            </button>
-                        </li>
-                    </ul>
-                </section>
+            <nav class="contacts-nav" id="contacts-list-data" aria-label="Список контактів">
             </nav>
         </aside>
 
-        <!-- Права панель: Деталі контакту -->
+        <!-- Права панель: Деталі (Add / Edit) -->
         <main class="main-content">
             <header class="profile-header">
                 <div class="profile-summary">
-                    <div class="avatar-large" aria-hidden="true">MN</div>
+                    <div class="avatar-large" id="detail-initials" aria-hidden="true">MN</div>
 
                     <div class="profile-title">
-                        <h2>Maria Novak</h2>
-
-                        <p class="timestamp">
-                            Added Mar 14 ·
-                            <span class="fallback-text">avatar: initials fallback</span>
+                        <h2 id="panel-title">Contact Profile</h2>
+                        <p class="timestamp" id="detail-date">
+                            Select a contact or click Add contact
                         </p>
                     </div>
                 </div>
 
-                <div class="action-buttons">
-                    <button type="button" class="btn-edit">Edit</button>
-                    <button type="button" class="btn-delete">Delete</button>
+                <div class="action-buttons" id="view-actions">
+                    <button type="button" class="btn-edit" id="edit-btn">Edit</button>
+                    <button type="button" class="btn-delete" id="delete-btn">Delete</button>
                 </div>
             </header>
 
-            <!-- Таблиця опису -->
-            <dl class="details-grid">
-                <div class="table-row">
-                    <dt class="label">PHONE</dt>
-                    <dd class="value">+1 (312) 555-0146</dd>
-                </div>
+            <form id="contact-form" novalidate style="display: flex; flex-direction: column; gap: 20px; height: 100%;">
+                <input type="hidden" id="contact-id">
 
-                <div class="table-row">
-                    <dt class="label">EMAIL</dt>
-                    <dd class="value">maria.novak@fastmail.com</dd>
-                </div>
+                <dl class="details-grid">
 
-                <div class="table-row">
-                    <dt class="label">NOTE</dt>
-                    <dd class="value value-note">Study group partner — prefers texts over calls. Met at the Week 3
-                        workshop.</dd>
-                </div>
-            </dl>
+                    <div class="table-row">
+                        <dt class="label">PHONE</dt>
+                        <dd class="value" style="width: 100%;">
+                            <input type="text" id="input-phone" readonly
+                                style="width: 100%; border: none; font-size: 17px; font-weight: 500; color: var(--text-main); outline: none; background: transparent;">
+                        </dd>
+                    </div>
 
-            <!-- Нижня технічна ремарка -->
-            <footer class="tech-note">
-                <p>Async touchpoint: avatar image is fetched from a placeholder-avatar API. While loading — and on any
-                    fetch failure — the initials circle renders instead. The app never blocks on this request.</p>
-            </footer>
+                    <div class="table-row">
+                        <dt class="label">EMAIL</dt>
+                        <dd class="value"
+                            style="flex-direction: column; align-items: flex-start; gap: 4px; width: 100%;">
+                            <input type="email" id="input-email" readonly
+                                style="width: 100%; border: none; font-size: 17px; font-weight: 500; color: var(--text-main); outline: none; background: transparent;">
+                            <span class="error-message" id="error-email"
+                                style="color: var(--danger-color); font-size: 12px; font-weight: 600; display: none;"></span>
+                        </dd>
+                    </div>
+
+                    <div class="table-row">
+                        <dt class="label">NOTE</dt>
+                        <dd class="value value-note" style="width: 100%;">
+                            <textarea id="input-note" readonly
+                                style="width: 100%; border: none; font-size: 17px; font-family: inherit; color: var(--text-sub); outline: none; background: transparent; resize: none; min-height: 60px;"></textarea>
+                        </dd>
+                    </div>
+                </dl>
+
+                <div class="action-buttons" id="form-actions"
+                    style="display: none; justify-content: flex-start; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn-edit"
+                        style="background-color: var(--primary-color); color: white; border: none;">Save</button>
+                    <button type="button" class="btn-edit" id="cancel-btn">Cancel</button>
+                </div>
+            </form>
         </main>
     </div>
+
+    <script src="ContBook_IK.js"></script>
 </body>
 
 </html>
