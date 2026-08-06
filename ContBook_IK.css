@@ -21,10 +21,7 @@
 
 body {
   background-color: var(--bg-body);
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,6 +39,8 @@ body {
   background-color: var(--bg-app);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  /* Тінь зміщена на 0 по горизонталі, на 4px вниз, має розмиття 20px і колір rgba(0, 0, 0, 0.05) 
+  (чорний колір із прозорістю всього 30%) */
   overflow: hidden;
 }
 
@@ -53,6 +52,7 @@ body {
   flex-direction: column;
   padding: 24px;
   overflow: hidden;
+  /* Ховає (обрізає) будь-який контент, який намагається вилізти за межі цього контейнера */
 }
 
 .sidebar-header {
@@ -60,6 +60,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  /* Створює зовнішній пустий простір у 16 пікселів знизу під цією шапкою */
 }
 
 .title-group {
@@ -87,7 +88,11 @@ body {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
+  /* Змінює стандартну стрілку курсора миші на «руку з вказівним пальцем» при наведенні на кнопку */
   transition: background-color 0.2s ease;
+  /* Що робить: Змушує колір фону змінюватися плавно, а не миттєво.
+  Як саме: Анімація триває всього 0.2 секунди з м'яким стартом і фінішем (ease). 
+  Вона спрацює, якщо ви додасте ефект наведення миші (:hover) */
 }
 
 .btn-add:hover {
@@ -108,14 +113,18 @@ body {
   border-radius: 6px;
   font-size: 14px;
   background-color: #ffffff;
-  color: var(--text-muted);
+  color: var(--text-main); /* Змінено на основний для читабельності введення */
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: var(--primary-color); 
 }
 
 .lucide-search {
   position: absolute;
   left: 12px;
   color: var(--text-muted);
-  font-size: 10px;
   pointer-events: none;
 }
 
@@ -123,6 +132,8 @@ body {
   flex: 1;
   overflow-y: auto;
 }
+
+/* .group-section {} */
 
 .group-letter {
   font-size: 12px;
@@ -133,6 +144,7 @@ body {
 
 .contacts-list {
   list-style: none;
+  /* Прибирає крапки біля елементів списку */
 }
 
 .contact-item {
@@ -141,16 +153,23 @@ body {
   align-items: center;
   padding: 10px;
   border-radius: 8px;
-  border: none;
+  border: 1px solid transparent; /* Виправлено: запобігає смиканню при активному стані */
   background: transparent;
+  /* роблять фон повністю прозорим */
   text-align: left;
   cursor: pointer;
   margin-bottom: 4px;
-  transition: background-color 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 .contact-item:hover {
   background-color: #f1f5f9;
+}
+
+/* Виправлено каскад селектора для активного стану кнопки */
+.contact-item.active {
+  background-color: #E8EEFC;
+  border-color: #C7D7F5;
 }
 
 .avatar {
@@ -164,38 +183,16 @@ body {
   font-weight: 600;
   margin-right: 12px;
   flex-shrink: 0;
+  /* Забороняє Flexbox-контейнеру (батьківському блоку .contact-item) стискати цей кружечок */
 }
 
 /* Кольори аватарів */
-.av-ab {
-  background-color: #DCE7FB;
-  color: #2E63D6;
-}
-
-.av-ar {
-  background-color: #DBEEEA;
-  color: #1F7A6D;
-}
-
-.av-dk {
-  background-color: #EFE4F7;
-  color: #7A4A9E;
-}
-
-.av-mn {
-  background-color: #2E63D6;
-  color: #ffffff;
-}
-
-.av-mo {
-  background-color: #FBEEDC;
-  color: #A1701C;
-}
-
-.av-sl {
-  background-color: #DCE7FB;
-  color: #2E63D6;
-}
+.av-ab { background-color: #DCE7FB; color: #2E63D6; }
+.av-ar { background-color: #DBEEEA; color: #1F7A6D; }
+.av-dk { background-color: #EFE4F7; color: #7A4A9E; }
+.av-mn { background-color: #2E63D6; color: #ffffff; }
+.av-mo { background-color: #FBEEDC; color: #A1701C; }
+.av-sl { background-color: #DCE7FB; color: #2E63D6; }
 
 .contact-info {
   display: flex;
@@ -213,12 +210,6 @@ body {
   font-size: 13px;
   color: var(--text-sub);
   margin-top: 2px;
-}
-
-.contacts-list .active {
-  background-color: #E8EEFC;
-  border: 1px solid #C7D7F5;
-  border-radius: 8px;
 }
 
 /* Деталі */
@@ -268,6 +259,11 @@ body {
   margin-top: 4px;
 }
 
+.fallback-text {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
 .action-buttons {
   display: flex;
   gap: 8px;
@@ -308,8 +304,10 @@ body {
   grid-template-columns: 1fr;
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  margin-bottom: auto;
-  /* Притискає футер */
+  /* overflow: hidden;
+  Примусово обрізає будь-який внутрішній контент (текст, інші блоки або фонові зображення), 
+  який намагається вилізти за межі цього елемента */
+  margin-bottom: auto; /* Притискає футер */
 }
 
 .table-row {
@@ -362,6 +360,9 @@ body {
 
 .tech-note::before {
   content: "";
+  /* Надважливий рядок для будь-якого псевдоелемента. 
+  Він каже браузеру: «Створи цей елемент, але залиш його порожнім (всередині немає тексту)». 
+  Без цієї властивості псевдоелемент взагалі не з'явиться на екрані. */
   width: 6px;
   height: 6px;
   background-color: #3b82f6;
@@ -369,6 +370,7 @@ body {
   margin-top: 6px;
   margin-right: 12px;
   flex-shrink: 0;
+  /* Забороняє Flexbox-контейнеру (яким має бути сам блок .tech-note) стискати цей маркер */
 }
 
 .tech-note p {
@@ -378,21 +380,55 @@ body {
 }
 
 @media (max-width: 768px) {
+  body {
+    padding: 0px;
+  }
 
   .container {
-    grid-template-columns: auto;
-    gap: 10px;
-    align-items: stretch;
+    grid-template-columns: 1fr;
+    /* Одна колонка */
+    height: auto;               
+    /* Скинуто фіксовану висоту для гнучкості скролу */
+    max-height: none;
+    padding: 0px;
+  }
+
+  .sidebar {
+    height: 400px;              
+    /* Задано фіксовану висоту списку, щоб працював внутрішній скрол */
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
   }
 }
 
 @media (max-width: 480px) {
-  .table-row {
-    grid-template-columns: auto;
-  }
-
   .profile-header {
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;    
+    /* Виправлено: кнопки тепер під аватаром, а не притиснуті вправо */
+    gap: 16px;
+  }
+
+  .action-buttons {
+    width: 100%;
+  }
+
+  .action-buttons button {
+    flex: 1;                    
+    /* Кнопки розтягуються на всю ширину */
+    text-align: center;
+  }
+
+  .table-row {
+    grid-template-columns: 1fr; 
+    /* Трансформація таблиці в один стовпчик */
+  }
+
+  .table-row .label {
+    padding: 12px 16px 4px 16px;
+  }
+
+  .table-row .value {
+    padding: 4px 16px 12px 16px;
   }
 }
