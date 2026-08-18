@@ -1,0 +1,331 @@
+/* Базові скидання та загальні стилі */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    /*ззовні */
+    padding: 0;
+    /*всередині */
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #EAE7E0;
+    display: flex;
+    /*перетворює тег body на Flex-контейнер для керування його дочірніми елементами.*/
+    justify-content: center;
+    /*вирівнює контент по центру горизонтально.*/
+    align-items: center;
+    /*вирівнює контент по центру вертикально.*/
+    min-height: 100vh;
+    /*розтягує висоту body мінімум на 100% висоти екрана користувача, щоб вертикальне центрування працювало коректно.*/
+    padding: 20px;
+    /*відстань від контенту до країв body */
+}
+
+/* Контейнер усього макета */
+.page-container {
+    background-color: #fff;
+    border: 2px solid #2e2e2e;
+    /* додає чітку темно-сіру рамку завтовшки 2 пікселі */
+    border-radius: 24px;
+    /* сильно закругляє кути рамки, що відповідає сучасним трендам вебдизайну */
+    width: 100%;
+    /* розтягує контейнер на всю доступну ширину */
+    max-width: 1100px;
+    /* розтягується на всю ширину екрана, але не стає більшим за 1100 пікселів на моніторах */
+    padding: 40px;
+    display: flex;
+    /* вибудовує всі елементи всередині контейнера вертикально (один під одним) */
+    flex-direction: column;
+    /* встановлює напрямок flex-контейнера на вертикальний */
+    gap: 30px;
+    /* встановлює відстань між елементами всередині контейнера */
+}
+
+/* Шапка */
+
+.container {
+    display: flex;
+    margin-bottom: 5px;
+    gap: 10px;
+}
+
+.container__btn {
+    border: 2px solid #2e2e2e;
+    border-radius: 9px;
+    padding: 5px 10px;
+    font-weight: bold;
+    background-color: #F4D06A;
+}
+
+.container__title {
+    padding: 6px 5px;
+    color: #b5b5b5;
+}
+
+.header {
+    position: relative;
+    border: 1px dashed #b5b5b5;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.capital-letter {
+    position: absolute;
+    /* Дозволяє вільно рухати літеру всередині блока */
+    top: 7px;
+    /* Відступ від верхнього краю контейнера */
+    left: 7px;
+    /* Відступ від лівого краю контейнера */
+    font-size: 11px;
+    /* Маленький розмір шрифту */
+    font-weight: bold;
+    /* Робимо літеру чіткою */
+    color: #b5b5b5;
+    /* Світло-сірий колір, як пунктирні рамки на макеті */
+    text-transform: uppercase;
+    /* Пропускає літеру через верхній регістр */
+    pointer-events: none;
+    /* Щоб літера не заважала клікати по картці */
+}
+
+.header-in {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.header__logo {
+    background-color: #EDE3F6;
+    position: relative;
+    border: 2px solid #2e2e2e;
+    border-radius: 12px;
+    padding: 15px 90px;
+    /* задає великі відступи (15 пікселів зверху/знизу та 45 пікселів ліворуч/праворуч), роблячи зону логотипа витягнутою та солідною */
+    font-weight: bold;
+    color: #B9AEB4;
+}
+
+.header__nav {
+    position: relative;
+    border: 1px dashed #b5b5b5;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.header__nav-in {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+}
+
+.header__link {
+    background-color: #D9EDE4;
+    border: 2px solid #2e2e2e;
+    border-radius: 8px;
+    padding: 10px 35px;
+    margin: 5px;
+    font-weight: bold;
+    color: #B9AEB4;
+}
+
+.header__btn {
+    position: relative;
+    background-color: #FBE3D6;
+    /* робить фон кнопки прозорим, дозволяючи бачити колір підкладки */
+    border: 2px solid #2e2e2e;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-weight: bold;
+    cursor: pointer;
+    /* змінює вигляд курсора на «палець» при наведенні, підказуючи користувачеві, що елемент клікабельний */
+}
+
+/* Сітка з картками (Card Grid) */
+.card-grid {
+    position: relative;
+    border: 1px dashed #b5b5b5;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.card-grid-in {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.card {
+    position: relative;
+    border: 2px solid #2e2e2e;
+    border-radius: 16px;
+    padding: 15px;
+    min-height: 180px;
+    /* Встановлює мінімальну висоту картки. Якщо контенту мало (як у картках з однією літерою), вона все одно матиме висоту 180px. Якщо контенту буде багато, картка розтягнеться вниз, щоб вміститися. */
+    display: flex;
+    flex-direction: column;
+}
+
+.card--blue {
+    background-color: #DEE7F8;
+    justify-content: center;
+    color: #B4BBC3;
+}
+
+.card--yellow {
+    background-color: #F7EBCB;
+}
+
+.card--pink {
+    background-color: #F6DEE8;
+    justify-content: center;
+    color: #B4BBC3;
+}
+
+.card:nth-child(1),
+.card:nth-child(3) {
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card__title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    /* додає зовнішній відступ у 10 пікселів знизу. Це необхідно, щоб відштовхнути наступний елемент — абзац тексту (.card__text) — і вони не зливалися */
+    color: #2e2e2e;
+}
+
+.card__text {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    /* встановлює міжрядковий інтервал (висоту рядка), яка становить 140% від розміру шрифту. Завдяки цьому рядки тексту не злипаються, і його набагато легше читати */
+}
+
+.content-section {
+    position: relative;
+    border: 1px dashed #b5b5b5;
+    border-radius: 12px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+.paragraph-block {
+    background-color: #D6ECF2;
+    position: relative;
+    border: 2px solid #2e2e2e;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.paragraph-block__title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #2e2e2e;
+}
+
+.paragraph-block__text {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.sidebar {
+    position: relative;
+    border: 1px dashed #b5b5b5;
+    border-radius: 16px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+}
+
+.sidebar__item {
+    border: 2px solid #2e2e2e;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    color: #B4AE9F;
+}
+
+.sidebar__item--green {
+    background-color: #E7EAD6;
+}
+
+.sidebar__item--purple {
+    background-color: #EDE3F6;
+}
+
+/* Підвал (Footer) */
+.footer {
+    position: relative;
+    border: 1px dashed #b5b5b5;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__text {
+    background-color: #F7EBCB;
+    border: 2px solid #2e2e2e;
+    border-radius: 9px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.footer__element {
+    background-color: #D9EDE4;
+    border: 2px solid #2e2e2e;
+    border-radius: 12px;
+    padding: 15px 60px;
+    font-weight: bold;
+    color: #A3B0B0;
+}
+
+/* Адаптивність для мобільних пристроїв */"
+@media (max-width: 768px) {
+
+    .header,
+    .header-in {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .header__logo,
+    .header__link {
+        flex-direction: row;
+        gap: 10px;
+        align-items: stretch;
+        /* Змушує всі внутрішні елементи (логотип, блоки, меню та кнопки) розтягнутися на всю доступну ширину екрана */
+        text-align: center;
+        /* Вирівнює весь текст всередині цих блоків чітко по центру */
+    }
+
+    .header__nav {
+        flex-direction: row;
+        gap: 10px;
+        text-align: center;
+        /* Вирівнює весь текст всередині цих блоків чітко по центру */
+    }
+
+    .card-grid,
+    .content-section {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
