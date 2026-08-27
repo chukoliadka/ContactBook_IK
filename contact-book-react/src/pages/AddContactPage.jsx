@@ -99,7 +99,7 @@ function AddContactPage() {
         }
     }
 
-    function handleSave(event) {
+    async function handleSave(event) {
         event.preventDefault();
 
         clearErrors();
@@ -131,20 +131,42 @@ function AddContactPage() {
             return;
         }
 
-        const newContact = {
-            id: crypto.randomUUID(),
-            name: formData.name.trim(),
-            phone: formData.phone.trim(),
-            email: formData.email.trim(),
-            note: formData.note.trim(),
-            dateAdded: "Today",
-        };
+        try {
+            const response = await fetch(
+                "https://jsonplaceholder.typicode.com/users",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: formData.name.trim(),
+                        phone: formData.phone.trim(),
+                        email: formData.email.trim(),
+                        note: formData.note.trim(),
+                    }),
+                },
+            );
 
-        setContacts((prevContacts) => [...prevContacts, newContact]);
+            const user = await response.json();
 
-        clearErrors();
+            const newContact = {
+                id: user.id.toString(),
+                name: user.name,
+                phone: user.phone,
+                email: user.email,
+                note: user.note || "",
+                dateAdded: "Today",
+            };
 
-        navigate(`/contacts/${newContact.id}`);
+            setContacts((prevContacts) => [...prevContacts, newContact]);
+
+            clearErrors();
+
+            navigate(`/contacts/${newContact.id}`);
+        } catch (error) {
+            console.error("Failed to add contact:", error);
+        }
     }
 
     function handleCancel() {

@@ -87,7 +87,7 @@ function EditContactPage() {
         }
     }
 
-    function handleSave(event) {
+    async function handleSave(event) {
         event.preventDefault();
 
         clearErrors();
@@ -125,23 +125,46 @@ function EditContactPage() {
             return;
         }
 
-        setContacts((prevContacts) =>
-            prevContacts.map((contact) =>
-                contact.id === id
-                    ? {
-                        ...contact,
+        try {
+            const response = await fetch(
+                `https://jsonplaceholder.typicode.com/users/${id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
                         name: formData.name.trim(),
                         phone: formData.phone.trim(),
                         email: formData.email.trim(),
                         note: formData.note.trim(),
-                    }
-                    : contact,
-            ),
-        );
+                    }),
+                },
+            );
 
-        clearErrors();
+            const user = await response.json();
 
-        navigate(`/contacts/${id}`);
+            const updatedContact = {
+                id: user.id.toString(),
+                name: user.name,
+                phone: user.phone,
+                email: user.email,
+                note: user.note || "",
+                dateAdded: contact.dateAdded,
+            };
+
+            setContacts((prevContacts) =>
+                prevContacts.map((contact) =>
+                    contact.id === id ? updatedContact : contact,
+                ),
+            );
+
+            clearErrors();
+
+            navigate(`/contacts/${id}`);
+        } catch (error) {
+            console.error("Failed to update contact:", error);
+        }
     }
 
     function handleCancel() {

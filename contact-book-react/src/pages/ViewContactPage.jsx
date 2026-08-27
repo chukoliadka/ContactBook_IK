@@ -60,18 +60,33 @@ function ViewContactPage() {
         navigate(`/contacts/${id}/edit`);
     }
 
-    function handleDelete() {
+    async function handleDelete() {
         const shouldDelete = window.confirm(
             "Are you sure you want to delete this contact?",
         );
 
         if (!shouldDelete) return;
 
-        setContacts((prevContacts) =>
-            prevContacts.filter((contact) => contact.id !== id),
-        );
+        try {
+            const response = await fetch(
+                `https://jsonplaceholder.typicode.com/users/${id}`,
+                {
+                    method: "DELETE",
+                },
+            );
 
-        navigate("/contacts");
+            if (!response.ok) {
+                throw new Error("Failed to delete contact");
+            }
+
+            setContacts((prevContacts) =>
+                prevContacts.filter((contact) => contact.id !== id),
+            );
+
+            navigate("/contacts");
+        } catch (error) {
+            console.error("Failed to delete contact:", error);
+        }
     }
 
     return (
