@@ -1,6 +1,21 @@
 import { useState } from "react";
-import { useNavigate, useParams, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "../App.css";
+
+function getInitials(name) {
+    if (!name) return "??";
+
+    const words = name
+        .trim()
+        .split(/\s+/)
+        .filter((word) => word.length > 0);
+
+    if (words.length >= 2) {
+        return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
+    }
+
+    return words[0].charAt(0).toUpperCase();
+}
 
 function getAvatarClass(name) {
     if (!name) return "avatar-color-1";
@@ -28,18 +43,15 @@ function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function EditContactPage() {
+function AddContactPage() {
     const navigate = useNavigate();
-    const { id } = useParams();
-    const { contacts, setContacts } = useOutletContext();
-
-    const contact = contacts.find((contact) => contact.id === id);
+    const { setContacts } = useOutletContext();
 
     const [formData, setFormData] = useState({
-        name: contact?.name || "",
-        phone: contact?.phone || "",
-        email: contact?.email || "",
-        note: contact?.note || "",
+        name: "",
+        phone: "",
+        email: "",
+        note: "",
     });
 
     const [nameError, setNameError] = useState("");
@@ -94,75 +106,50 @@ function EditContactPage() {
 
         let hasError = false;
 
-        // Перевірка Name
+        // Name
         if (!formData.name.trim()) {
             setNameError("Name is required");
             hasError = true;
-        } else {
-            setNameError("");
         }
 
-        // Перевірка Phone
+        // Phone
         if (!formData.phone.trim()) {
             setPhoneError("Phone is required");
             hasError = true;
         } else if (!isValidPhone(formData.phone.trim())) {
             setPhoneError("Enter a valid phone number");
             hasError = true;
-        } else {
-            setPhoneError("");
         }
 
-        // Перевірка Email
+        // Email
         if (formData.email.trim() && !isValidEmail(formData.email.trim())) {
             setEmailError("Enter a valid email address");
             hasError = true;
-        } else {
-            setEmailError("");
         }
 
         if (hasError) {
             return;
         }
 
-        setContacts((prevContacts) =>
-            prevContacts.map((contact) =>
-                contact.id === id
-                    ? {
-                        ...contact,
-                        name: formData.name.trim(),
-                        phone: formData.phone.trim(),
-                        email: formData.email.trim(),
-                        note: formData.note.trim(),
-                    }
-                    : contact,
-            ),
-        );
+        const newContact = {
+            id: crypto.randomUUID(),
+            name: formData.name.trim(),
+            phone: formData.phone.trim(),
+            email: formData.email.trim(),
+            note: formData.note.trim(),
+            dateAdded: "Today",
+        };
+
+        setContacts((prevContacts) => [...prevContacts, newContact]);
 
         clearErrors();
 
-        navigate(`/contacts/${id}`);
+        navigate(`/contacts/${newContact.id}`);
     }
 
     function handleCancel() {
-        clearErrors()
-        navigate(`/contacts/${id}`);
-    }
-
-    if (!contact) {
-        return (
-            <main className="main-content">
-                <div className="empty-state">
-                    <h2>Contact not found</h2>
-
-                    <p>The contact you are trying to edit does not exist.</p>
-
-                    <button type="button" className="btn-edit" onClick={handleCancel}>
-                        Back to contacts
-                    </button>
-                </div>
-            </main>
-        );
+        clearErrors();
+        navigate("/contacts");
     }
 
     return (
@@ -173,24 +160,17 @@ function EditContactPage() {
                         className={`avatar-large ${getAvatarClass(formData.name)}`}
                         aria-hidden="true"
                     >
-                        {formData.name
-                            ? formData.name
-                                .trim()
-                                .split(/\s+/)
-                                .map((word) => word.charAt(0))
-                                .slice(0, 2)
-                                .join("")
-                                .toUpperCase()
-                            : "??"}
+                        {getInitials(formData.name)}
                     </div>
 
                     <div className="profile-title">
                         <input
                             type="text"
                             name="name"
-                            className="profile-name-input"
                             value={formData.name}
                             onChange={handleChange}
+                            placeholder="Contact name"
+                            className="profile-name-input"
                         />
 
                         {nameError && (
@@ -272,4 +252,4 @@ function EditContactPage() {
     );
 }
 
-export default EditContactPage;
+export default AddContactPage;

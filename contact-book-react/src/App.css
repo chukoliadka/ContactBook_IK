@@ -172,7 +172,6 @@ body {
   background-color: #f1f5f9;
 }
 
-/* Виправлено каскад селектора для активного стану кнопки */
 .contact-item.active {
   background-color: #E8EEFC;
   border-color: #C7D7F5;
@@ -192,13 +191,30 @@ body {
   /* Забороняє Flexbox-контейнеру (батьківському блоку .contact-item) стискати цей кружечок */
 }
 
-/* Кольори аватарів */
-.av-ab { background-color: #DCE7FB; color: #2E63D6; }
-.av-ar { background-color: #DBEEEA; color: #1F7A6D; }
-.av-dk { background-color: #EFE4F7; color: #7A4A9E; }
-.av-mn { background-color: #2E63D6; color: #ffffff; }
-.av-mo { background-color: #FBEEDC; color: #A1701C; }
-.av-sl { background-color: #DCE7FB; color: #2E63D6; }
+.avatar-color-1 {
+  background-color: #DCE7FB;
+  color: #2E63D6;
+}
+
+.avatar-color-2 {
+  background-color: #DBEEEA;
+  color: #1F7A6D;
+}
+
+.avatar-color-3 {
+  background-color: #EFE4F7;
+  color: #7A4A9E;
+}
+
+.avatar-color-4 {
+  background-color: #FBEEDC;
+  color: #A1701C;
+}
+
+.avatar-color-5 {
+  background-color: #E8EEFC;
+  color: #3158A8;
+}
 
 .contact-info {
   display: flex;
@@ -241,8 +257,6 @@ body {
 .avatar-large {
   width: 90px;
   height: 90px;
-  background-color: var(--primary-color);
-  color: #ffffff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
